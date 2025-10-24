@@ -5,6 +5,16 @@ import { Header } from "@/app/_features/Header";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
+
 const BASE_URL = "https://api.themoviedb.org/3";
 
 const ACCESS_TOKEN =
@@ -57,6 +67,32 @@ export default function MoviesType() {
             />
           ))}
         </div>
+      </div>
+      <div className="w-[1280px] flex justify-end pt-10">
+        <Pagination>
+          <PaginationContent>
+            <PaginationItem>
+              <PaginationPrevious href="#" />
+            </PaginationItem>
+            <PaginationItem>
+              <PaginationLink href="#" isActive>
+                1
+              </PaginationLink>
+            </PaginationItem>
+            <PaginationItem>
+              <PaginationLink href="#">2</PaginationLink>
+            </PaginationItem>
+            <PaginationItem>
+              <PaginationLink href="#">3</PaginationLink>
+            </PaginationItem>
+            <PaginationItem>
+              <PaginationEllipsis />
+            </PaginationItem>
+            <PaginationItem>
+              <PaginationNext href="#" />
+            </PaginationItem>
+          </PaginationContent>
+        </Pagination>
       </div>
       <Footer />
     </div>
