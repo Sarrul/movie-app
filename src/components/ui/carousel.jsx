@@ -169,9 +169,7 @@ const CarouselDots = React.forwardRef(({ className, ...props }, ref) => {
           key={index}
           className={cn(
             "h-2 w-2 rounded-full transition-colors duration-300",
-            index === selectedIndex
-              ? "bg-primary "
-              : "bg-primary-foreground/50 hover:bg-primary-foreground"
+            index === selectedIndex ? "bg-white " : "bg-[#FFFFFFCC] "
           )}
           onClick={() => scrollTo(index)}
         />

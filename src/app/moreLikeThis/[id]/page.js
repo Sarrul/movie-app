@@ -20,19 +20,20 @@ const BASE_URL = "https://api.themoviedb.org/3";
 const ACCESS_TOKEN =
   "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMjI5ZmNiMGRmZTNkMzc2MWFmOWM0YjFjYmEyZTg1NiIsIm5iZiI6MTc1OTcxMTIyNy43OTAwMDAyLCJzdWIiOiI2OGUzMGZmYjFlN2Y3MjAxYjI5Y2FiYmIiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.M0DQ3rCdsWnMw8U-8g5yGXx-Ga00Jp3p11eRyiSxCuY";
 
-export default function MoviesType() {
-  const param = useParams();
+export default function MoreLikeThis() {
+  const params = useParams();
   const [movieData, setMoviedata] = useState([]);
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
+  const id = params.id;
 
   const getData = async () => {
     try {
       //   setLoading(true);
-      const PopularMovieEndpoint = `${BASE_URL}/movie/${param.type}?language=en-US&page=${page}`;
-      console.log("Fetching:", PopularMovieEndpoint);
+      const MoreLikeThisEndpoint = `${BASE_URL}/movie/${id}/similar?language=en-US&page=${page}`;
+      console.log("Fetching:", MoreLikeThisEndpoint);
 
-      const response = await fetch(PopularMovieEndpoint, {
+      const response = await fetch(MoreLikeThisEndpoint, {
         headers: {
           Authorization: `Bearer ${ACCESS_TOKEN}`,
           "Content-Type": "application/json",
@@ -50,7 +51,7 @@ export default function MoviesType() {
 
   useEffect(() => {
     getData();
-  }, [page, param.type]);
+  }, [page]);
 
   const handlePreviousBtn = (page) => {
     if (page > 1) {
@@ -72,7 +73,7 @@ export default function MoviesType() {
     <div className="w-screen min-h-screen flex items-center flex-col">
       <Header />
       <div className="flex flex-col items-start">
-        <p className="font-semibold text-2xl py-6  pl-20">{param.type}</p>
+        <p className="font-semibold text-2xl py-6  pl-20">More like this</p>
         <div className="px-20 grid grid-cols-5 gap-8 overflow-x-auto">
           {movieData.slice(0, 10).map((movie) => (
             <MovieCard

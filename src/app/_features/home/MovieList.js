@@ -3,6 +3,7 @@ import { MovieCard } from "@/app/_components/MovieCard";
 import { ArrowRight } from "@/app/_icons/ArrowRight";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { LoadingMovieList } from "../skeloton/LoadingMovielist";
 
 const BASE_URL = "https://api.themoviedb.org/3";
 
@@ -11,15 +12,14 @@ const ACCESS_TOKEN =
 
 export const MovieList = ({ type, title }) => {
   const [loading, setLoading] = useState(false);
-
   const router = useRouter();
 
   const [movieData, setMoviedata] = useState([]);
   const getData = async () => {
     setLoading(true);
     try {
-      const PopularMovieEndpoint = `${BASE_URL}/movie/${type}?language=en-US&page=1`;
-      const response = await fetch(PopularMovieEndpoint, {
+      const MoviesEndpoint = `${BASE_URL}/movie/${type}?language=en-US&page=1`;
+      const response = await fetch(MoviesEndpoint, {
         headers: {
           Authorization: `Bearer ${ACCESS_TOKEN}`,
           "Content-Type": "application/json",
@@ -41,16 +41,21 @@ export const MovieList = ({ type, title }) => {
     router.push(`movies/${type}`);
   };
 
-  if (loading) return <div className="text-center py-10">Loading...</div>;
+  if (loading)
+    return (
+      <div>
+        <LoadingMovieList />
+      </div>
+    );
   return (
     <div className="gap-8 flex flex-col">
-      <div className="max-w-full flex flex-row justify-between px-20 mt-13">
+      <div className="max-w-full flex flex-row justify-between px-20 mt-13 ">
         <p className="font-semibold text-2xl ">{title}</p>
         <div
           className="flex h-9 py-2 px-4 justify-center items-center gap-2 cursor-pointer"
           onClick={handleSeeMorebtn}
         >
-          <p className="text-sm font-medium">See more</p>
+          <p className="text-sm font-medium hover:underline">See more</p>
           <ArrowRight />
         </div>
       </div>
@@ -59,6 +64,7 @@ export const MovieList = ({ type, title }) => {
         {movieData.slice(0, 10).map((movie) => (
           <MovieCard
             key={movie.id}
+            id={movie.id}
             rating={movie.vote_average}
             title={movie.title}
             imageUrl={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
