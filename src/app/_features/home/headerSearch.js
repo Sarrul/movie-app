@@ -2,6 +2,7 @@
 
 import { MovieCard } from "@/app/_components/MovieCard";
 import { SearchIcon } from "@/app/_icons/SearchIcon";
+import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -13,9 +14,12 @@ const ACCESS_TOKEN =
 export const HeaderSearch = () => {
   const [searchData, setSearchData] = useState([]);
   const [searchValue, setSearchValue] = useState("");
+  const [loading, setLoading] = useState(false);
+
   const router = useRouter();
 
   const SearchDataList = async () => {
+    setLoading(true);
     const SearchDataEndpoint = `${BASE_URL}/search/movie?query=${searchValue}&language=en-US&page=1`;
     const searchDataResponse = await fetch(SearchDataEndpoint, {
       headers: {
@@ -25,13 +29,15 @@ export const HeaderSearch = () => {
     });
     const data = await searchDataResponse.json();
     setSearchData(data.results);
+    setLoading(false);
+  };
+  const handleSeeAllResults = () => {
+    router.push(`/searchResult/${encodeURIComponent(searchValue)}`);
   };
 
   useEffect(() => {
     SearchDataList();
   }, [searchValue]);
-
-  console.log("headerSearchData", searchData);
 
   return (
     <div>
@@ -45,21 +51,30 @@ export const HeaderSearch = () => {
       </div>
       {searchValue && (
         <div className="absolute z-[100] bg-[#FFFFFF] rounded-lg border border-[#E4E4E7] mt-1 w-[577px]">
-          {searchData.slice(0, 5).map((movie) => {
-            return (
-              <MovieCard
-                key={movie.id}
-                direction="horizontal"
-                id={movie.id}
-                title={movie.title}
-                rating={movie.vote_average}
-                imageUrl={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
-              />
-            );
-          })}
-          <button className="text-sm font-medium leading-[20px] py-[8px] px-[16px]">
-            See all results for "{searchValue}"
-          </button>
+          {loading ? (
+            <div className="flex justify-center items-center w-[553px] h-[128px]">
+              <Loader2 className="animate-spin w-10 h-10 text-gray-500" />
+            </div>
+          ) : (
+            <div className="w-full overflow-y-auto px-2">
+              {searchData.slice(0, 5).map((movie) => (
+                <MovieCard
+                  key={movie.id}
+                  direction="horizontal"
+                  id={movie.id}
+                  title={movie.title}
+                  rating={movie.vote_average}
+                  imageUrl={`https://image.tmdb.org/t/p/w92${movie.poster_path}`}
+                />
+              ))}
+              <button
+                className="text-sm font-medium leading-[20px] py-[8px] px-[16px]"
+                onClick={handleSeeAllResults}
+              >
+                See all results for "{searchValue}"
+              </button>
+            </div>
+          )}
         </div>
       )}
     </div>

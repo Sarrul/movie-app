@@ -21,13 +21,6 @@ export const Header = () => {
         <div className="flex flex-row border border-[#E4E4E7] shadow-sm w-[97px] h-[36px] px-2 justify-center items-center gap-2 rounded-md">
           <Genre />
         </div>
-
-        {/* <SearchIcon />
-          <input
-            className="font-inter text-sm font-normal leading-5 focus:outline-none focus:ring-0 w-full"
-            placeholder="Search.."
-            type="text"
-          /> */}
         <HeaderSearch />
       </div>
 

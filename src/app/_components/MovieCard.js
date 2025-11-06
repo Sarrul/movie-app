@@ -38,7 +38,9 @@ export const MovieCard = ({ rating, title, imageUrl, id, direction }) => {
                 2024
               </div>
               <button className="w-[120px] h-[36px] flex items-center justify-center gap-2 px-16px cursor-pointer ">
-                <p className="text-sm font-medium text-[#09090B]">See more</p>
+                <p className="text-sm font-medium text-[#09090B] hover:underline">
+                  See more
+                </p>
                 <ArrowRight />
               </button>
             </div>
