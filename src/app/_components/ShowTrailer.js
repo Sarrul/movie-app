@@ -1,14 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+import { useRouter } from "next/navigation";
 
 const BASE_URL = "https://api.themoviedb.org/3";
 
@@ -17,6 +10,7 @@ const ACCESS_TOKEN =
 
 export default function ShowTrailer({ id, show, onClose }) {
   const [trailerKey, setTrailerKey] = useState("");
+  const router = useRouter();
 
   const getTrailer = async () => {
     const response = await fetch(
@@ -35,6 +29,10 @@ export default function ShowTrailer({ id, show, onClose }) {
     setTrailerKey(trailer?.key);
   };
 
+  const handleSeeDetail = (id) => {
+    router.push(`/movieDetails/${id}`);
+  };
+
   useEffect(() => {
     if (show) getTrailer();
   }, [id, show]);
@@ -43,20 +41,14 @@ export default function ShowTrailer({ id, show, onClose }) {
 
   return (
     <div>
-      <div className="fixed inset-0 flex items-center justify-center bg-black/80 z-50">
-        <Dialog>
-          <DialogTrigger>Open</DialogTrigger>
-          <DialogContent>
-            <DialogHeader>
-              <DialogTitle>Are you absolutely sure?</DialogTitle>
-              <DialogDescription>
-                This action cannot be undone. This will permanently delete your
-                account and remove your data from our servers.
-              </DialogDescription>
-            </DialogHeader>
-          </DialogContent>
-        </Dialog>
-        <div className="relative w-full max-w-3xl aspect-video">
+      <div
+        className="fixed inset-0 flex items-center justify-center bg-black/80 z-50"
+        onClick={onClose}
+      >
+        <div
+          className="relative w-full max-w-3xl aspect-video"
+          onClick={(e) => e.stopPropagation()}
+        >
           <iframe
             width="100%"
             height="100%"
@@ -66,10 +58,10 @@ export default function ShowTrailer({ id, show, onClose }) {
             allowFullScreen
           ></iframe>
           <button
-            className="absolute top-3 right-3 bg-white px-3 py-1 rounded-full"
-            onClick={onClose}
+            className="absolute top-3 right-3 bg-white px-3 py-1 rounded-[10px]"
+            onClick={() => handleSeeDetail(id)}
           >
-            ✕
+            see movie detail
           </button>
         </div>
       </div>

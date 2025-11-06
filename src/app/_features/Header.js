@@ -1,9 +1,10 @@
 import { ChevronDown } from "../_icons/ChevronDown";
-import { MagnifyIcon } from "../_icons/MaginfyIcon";
+import { SearchIcon } from "../_icons/SearchIcon";
 import { MovieIcon } from "../_icons/MovieIcon";
 import { Moon } from "../_icons/Moon";
 import Link from "next/link";
-import { Genre } from "./home/genre";
+import { Genre } from "./home/headerGenre";
+import { HeaderSearch } from "./home/headerSearch";
 
 export const Header = () => {
   return (
@@ -21,14 +22,13 @@ export const Header = () => {
           <Genre />
         </div>
 
-        <div className="flex flex-row border border-[#E4E4E7] shadow-sm w-[379px] h-[36px] px-2 justify-start items-center gap-2 rounded-md">
-          <MagnifyIcon />
+        {/* <SearchIcon />
           <input
             className="font-inter text-sm font-normal leading-5 focus:outline-none focus:ring-0 w-full"
             placeholder="Search.."
             type="text"
-          />
-        </div>
+          /> */}
+        <HeaderSearch />
       </div>
 
       <div className="flex w-9 h-9 justify-center items-center border border-[#E4E4E7] shadow-sm rounded-md">

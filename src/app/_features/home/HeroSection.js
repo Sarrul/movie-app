@@ -15,9 +15,19 @@ import {
   CarouselPrevious,
   CarouselDots,
 } from "@/components/ui/carousel";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { StarIcon } from "@/app/_icons/StarIcon";
 import { WatchTrailerIcon } from "@/app/_icons/WatchTrailerIcon";
 import ShowTrailer from "@/app/_components/ShowTrailer";
+import { Button } from "@/components/ui/button";
 
 const BASE_URL = "https://api.themoviedb.org/3";
 
@@ -102,7 +112,7 @@ export function HeroSection(id) {
                     </div>
                     <div className="text-[#FAFAFA] font-inter text-xs font-normal leading-4 w-[302px]">
                       {movie.overview}
-                    </div>
+                    </div>{" "}
                     <div className="flex h-[40px] py-2 px-4 justify-center items-center gap-2 rounded-md bg-[#F4F4F5]  hover:bg-[#f4f4f5]/70">
                       <WatchTrailerIcon />
                       <button
