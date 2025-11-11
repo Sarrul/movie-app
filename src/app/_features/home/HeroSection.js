@@ -15,19 +15,9 @@ import {
   CarouselPrevious,
   CarouselDots,
 } from "@/components/ui/carousel";
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
 import { StarIcon } from "@/app/_icons/StarIcon";
 import { WatchTrailerIcon } from "@/app/_icons/WatchTrailerIcon";
 import ShowTrailer from "@/app/_components/ShowTrailer";
-import { Button } from "@/components/ui/button";
 
 const BASE_URL = "https://api.themoviedb.org/3";
 
@@ -36,7 +26,7 @@ const ACCESS_TOKEN =
 
 export function HeroSection(id) {
   const [movieData, setMoviedata] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const router = useRouter();
   const [showTrailer, setShowTrailer] = useState(false);
   const [selectedMovieId, setSelectedMovieId] = useState(null);
@@ -53,10 +43,10 @@ export function HeroSection(id) {
       });
       const data = await response.json();
       setMoviedata(data.results);
+      setLoading(false);
     } catch (err) {
       console.error("Failed to fetch upcoming movies:", err);
     }
-    setLoading(false);
   };
 
   useEffect(() => {
@@ -76,7 +66,7 @@ export function HeroSection(id) {
       </div>
     );
   return (
-    <Carousel className="w-[1440px] h-[600px] relative ">
+    <Carousel className="w-full h-[246px] lg:h-[600px] relative ">
       <CarouselContent className="flex h-full">
         {movieData.slice(0, 5).map((movie, index) => (
           <CarouselItem
@@ -84,7 +74,7 @@ export function HeroSection(id) {
             className="flex-shrink-0 flex-grow-0 basis-full h-full"
           >
             <Card className="h-full flex flex-col">
-              <CardContent className="w-full h-[600px]">
+              <CardContent className="w-full h-full">
                 <div
                   style={{
                     backgroundImage: `url('https://image.tmdb.org/t/p/original${movie.backdrop_path}')`,
@@ -92,12 +82,12 @@ export function HeroSection(id) {
                   className="w-full h-full bg-cover bg-center cursor-pointer"
                   onClick={() => handleMovieDetails(movie.id)}
                 >
-                  <div className=" flex flex-col items-start gap-4 pt-44.5 pl-35 w-[404px]">
+                  <div className=" flex flex-col items-start gap-4 pt-12 sm:pt-16 md:pt-32 lg:pt-44 pl-4 sm:pl-8 md:pl-16 lg:pl-35 w-[90%] sm:w-[404px]">
                     <div>
                       <span className="text-white font-inter text-base font-normal leading-6">
                         Now Playing:
                       </span>
-                      <p className="text-white font-inter text-4xl font-bold leading-[40px] tracking-[-0.9px]">
+                      <p className="text-white text-lg sm:text-xl md:text-2xl lg:text-4xl font-bold">
                         {movie.title}
                       </p>
                       <div className="flex gap-1 items-center">
@@ -113,7 +103,7 @@ export function HeroSection(id) {
                     <div className="text-[#FAFAFA] font-inter text-xs font-normal leading-4 w-[302px]">
                       {movie.overview}
                     </div>{" "}
-                    <div className="flex h-[40px] py-2 px-4 justify-center items-center gap-2 rounded-md bg-[#F4F4F5]  hover:bg-[#f4f4f5]/70">
+                    <div className="flex h-10 py-2 px-4 justify-center items-center gap-2 rounded-md bg-[#F4F4F5] hover:bg-[#f4f4f5]/70 text-sm sm:text-base">
                       <WatchTrailerIcon />
                       <button
                         onClick={(e) => {

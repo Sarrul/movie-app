@@ -43,7 +43,7 @@ export const Genre = () => {
     getData();
   }, []);
 
-  if (loading) return <div>loading .... </div>;
+  // if (loading) return <div>loading .... </div>;
   return (
     <NavigationMenu>
       <NavigationMenuList>

@@ -12,7 +12,7 @@ export const LoadingMoviesType = () => {
       <div className="flex flex-col gap-8 w-screen min-h-screen items-center">
         <Header />
         {/* Section title */}
-        <div className="w-full  flex flex-row justify-start px-110 mt-4">
+        <div className="w-[1280px]  flex flex-row justify-start">
           <Skeleton width={200} height={28} borderRadius={9999} />
         </div>
 

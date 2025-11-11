@@ -23,7 +23,7 @@ const ACCESS_TOKEN =
 export default function MoviesType() {
   const param = useParams();
   const [movieData, setMoviedata] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
 
   const getData = async () => {

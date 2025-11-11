@@ -57,22 +57,30 @@ export const HeaderSearch = () => {
             </div>
           ) : (
             <div className="w-full overflow-y-auto px-2">
-              {searchData.slice(0, 5).map((movie) => (
-                <MovieCard
-                  key={movie.id}
-                  direction="horizontal"
-                  id={movie.id}
-                  title={movie.title}
-                  rating={movie.vote_average}
-                  imageUrl={`https://image.tmdb.org/t/p/w92${movie.poster_path}`}
-                />
-              ))}
-              <button
-                className="text-sm font-medium leading-[20px] py-[8px] px-[16px]"
-                onClick={handleSeeAllResults}
-              >
-                See all results for "{searchValue}"
-              </button>
+              {searchData.length > 0 ? (
+                <div>
+                  {searchData.slice(0, 5).map((movie) => (
+                    <MovieCard
+                      key={movie.id}
+                      direction="horizontal"
+                      id={movie.id}
+                      title={movie.title}
+                      rating={movie.vote_average}
+                      imageUrl={`https://image.tmdb.org/t/p/w92${movie.poster_path}`}
+                    />
+                  ))}
+                  <button
+                    className="text-sm font-medium leading-[20px] py-[8px] px-[16px] hover:underline cursor-pointer"
+                    onClick={handleSeeAllResults}
+                  >
+                    See all results for "{searchValue}"
+                  </button>
+                </div>
+              ) : (
+                <div className="h-[95px] flex justify-center items-center">
+                  <p>No results found. </p>
+                </div>
+              )}
             </div>
           )}
         </div>

@@ -70,51 +70,10 @@ export const MovieCard = ({ rating, title, imageUrl, id, direction }) => {
             <span className="text-base font-normal text-[#71717A]">/10</span>
           </p>
         </div>
-        <p className="h-[56px] text-lg font-normal leading-[28px] p-1">
+        <p className="h-[56px] text-lg font-normal leading-[28px] pb-1 line-clamp-2">
           {title}
         </p>
       </div>
     </div>
   );
-  // return (
-  //   <div
-  //     className={`flex cursor-pointer${
-  //       direction === "horizontal" ? "flex-row gap-4" : "flex-col"
-  //     }`}
-  //     onClick={() => handleMovieDetails(id)}
-  //   >
-  //     <img
-  //       src={imageUrl}
-  //       alt={title}
-  //       className={`rounded-t-lg object-cover ${
-  //         direction === "horizontal"
-  //           ? "w-[67px] h-[100px]"
-  //           : "w-full max-w-[230px] h-[340px]"
-  //       }`}
-  //     />
-  //     <div
-  //       className={`bg-pink-300  p-2 flex flex-col justify-between ${
-  //         direction === "horizontal"
-  //           ? "w-"
-  //           : "max-w-[230px] w-full h-[95px]"
-  //       }`}
-  //     >
-  //       <p
-  //         className={`text-lg font-normal leading-[28px] line-clamp-2 overflow-hidden ${
-  //           direction === "horizontal" ? "w-full" : "h-[56px]"
-  //         }`}
-  //       >
-  //         {title}
-  //       </p>
-  //       <div className="flex items-center gap-1">
-  //         <StarIcon />
-  //         <p className="font-semibold text-lg text-[#09090B] flex items-center gap-1">
-  //           {Math.round(rating)}
-  //           <span className="text-base font-normal text-[#71717A]">/10</span>
-  //         </p>
-  //       </div>
-  //       {/* <p className="h-[56px] text-lg font-normal leading-[28px] line-clamp-2 overflow-hidden text-ellipsis "> */}
-  //     </div>
-  //   </div>
-  // );
 };

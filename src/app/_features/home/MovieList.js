@@ -11,7 +11,7 @@ const ACCESS_TOKEN =
   "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMjI5ZmNiMGRmZTNkMzc2MWFmOWM0YjFjYmEyZTg1NiIsIm5iZiI6MTc1OTcxMTIyNy43OTAwMDAyLCJzdWIiOiI2OGUzMGZmYjFlN2Y3MjAxYjI5Y2FiYmIiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.M0DQ3rCdsWnMw8U-8g5yGXx-Ga00Jp3p11eRyiSxCuY";
 
 export const MovieList = ({ type, title }) => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const router = useRouter();
 
   const [movieData, setMoviedata] = useState([]);
@@ -27,10 +27,10 @@ export const MovieList = ({ type, title }) => {
       });
       const data = await response.json();
       setMoviedata(data.results);
+      setLoading(false);
     } catch (err) {
       console.error("Failed to fetch upcoming movies:", err);
     }
-    setLoading(false);
   };
 
   useEffect(() => {
@@ -59,8 +59,8 @@ export const MovieList = ({ type, title }) => {
           <ArrowRight />
         </div>
       </div>
-
-      <div className="px-20 grid grid-cols-5 gap-8 overflow-x-auto">
+      {/* askkkkkkk teacherrrrrrrrr              this | */}
+      <div className="px-20 grid grid-cols-2 lg:grid-cols-5 gap-8 overflow-x-auto">
         {movieData.slice(0, 10).map((movie) => (
           <MovieCard
             key={movie.id}

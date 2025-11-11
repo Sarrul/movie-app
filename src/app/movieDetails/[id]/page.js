@@ -24,7 +24,7 @@ const ACCESS_TOKEN =
 export default function MovieDetails() {
   const { id } = useParams();
   const [movieData, setMoviedata] = useState();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [selectedMovieId, setSelectedMovieId] = useState(null);
   const [crewData, setCrewData] = useState();
   const [similarMovies, setSimilarMovies] = useState([]);
@@ -73,7 +73,6 @@ export default function MovieDetails() {
       setLoading(false);
     } catch (err) {
       console.error("Failed to fetch upcoming movies:", err);
-      setLoading(false);
     }
   };
 
