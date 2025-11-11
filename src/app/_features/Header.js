@@ -1,10 +1,8 @@
-import { ChevronDown } from "../_icons/ChevronDown";
-import { SearchIcon } from "../_icons/SearchIcon";
 import { MovieIcon } from "../_icons/MovieIcon";
-import { Moon } from "../_icons/Moon";
 import Link from "next/link";
 import { Genre } from "./home/headerGenre";
 import { HeaderSearch } from "./home/headerSearch";
+import { ToggleMode } from "@/app/_components/ToggleMode";
 
 export const Header = () => {
   return (
@@ -25,7 +23,7 @@ export const Header = () => {
       </div>
 
       <div className="flex w-9 h-9 justify-center items-center border border-[#E4E4E7] shadow-sm rounded-md">
-        <Moon />
+        <ToggleMode />
       </div>
     </div>
   );

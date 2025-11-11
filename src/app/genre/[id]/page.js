@@ -15,8 +15,8 @@ import {
 import { useParams } from "next/navigation";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
-import { ChevronRight } from "@/app/_icons/ChevronRight";
-import { XIcon } from "@/app/_icons/XIcon";
+import { ChevronRight } from "lucide-react";
+import { X } from "lucide-react";
 import { MovieCard } from "@/app/_components/MovieCard";
 
 const BASE_URL = "https://api.themoviedb.org/3";
@@ -131,20 +131,16 @@ export default function GenreResults() {
                   className="text-sm text-muted-foreground hover:text-primary transition"
                 >
                   <Badge
-                    variant={
-                      selectedGenres.includes(genre.id.toString())
-                        ? "secondary"
-                        : "default | outline"
-                    }
+                    variant="default"
                     className={
                       selectedGenres.includes(genre.id.toString())
-                        ? "bg-[#18181B] text-[#FAFAFA] flex items-center gap-1"
-                        : "bg-white text-black hover:bg-[#F4F4F5] flex items-center gap-1"
+                        ? "bg-[#18181B] dark:bg-white dark:text-black text-[#FAFAFA] flex items-center gap-1"
+                        : "bg-white dark:bg-[#18181B] dark:text-[#FAFAFA] text-black hover:bg-[#F4F4F5] flex items-center gap-1"
                     }
                   >
                     {genre.name}
                     {selectedGenres.includes(genre.id.toString()) ? (
-                      <XIcon
+                      <X
                         onClick={(e) => {
                           e.stopPropagation();
                           setSelectedGenres(
@@ -153,9 +149,14 @@ export default function GenreResults() {
                             )
                           );
                         }}
+                        className="dark:text-black"
                       />
                     ) : (
-                      <ChevronRight />
+                      <ChevronRight
+                        strokeWidth={2}
+                        color="currentColor"
+                        className="h-5 w-4 dark:text-white"
+                      />
                     )}
                   </Badge>
                 </Link>

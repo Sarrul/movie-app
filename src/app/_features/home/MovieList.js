@@ -1,6 +1,6 @@
 "use client";
 import { MovieCard } from "@/app/_components/MovieCard";
-import { ArrowRight } from "@/app/_icons/ArrowRight";
+import { ArrowRight } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { LoadingMovieList } from "../skeloton/LoadingMovielist";
@@ -56,11 +56,10 @@ export const MovieList = ({ type, title }) => {
           onClick={handleSeeMorebtn}
         >
           <p className="text-sm font-medium hover:underline">See more</p>
-          <ArrowRight />
+          <ArrowRight strokeWidth={1} className="w-4 h-4" />
         </div>
       </div>
-      {/* askkkkkkk teacherrrrrrrrr              this | */}
-      <div className="px-20 grid grid-cols-2 lg:grid-cols-5 gap-8 overflow-x-auto">
+      <div className="px-20 grid grid-cols-5 gap-8 overflow-x-auto">
         {movieData.slice(0, 10).map((movie) => (
           <MovieCard
             key={movie.id}

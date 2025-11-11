@@ -46,11 +46,14 @@ export const HeaderSearch = () => {
         <input
           placeholder="Search.."
           onChange={(e) => setSearchValue(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") handleSeeAllResults();
+          }}
           className="border-none outline-none "
         />
       </div>
       {searchValue && (
-        <div className="absolute z-[100] bg-[#FFFFFF] rounded-lg border border-[#E4E4E7] mt-1 w-[577px]">
+        <div className="absolute z-[100] bg-[#FFFFFF] dark:bg-gray-950 rounded-lg border border-[#E4E4E7] mt-1 w-[577px]">
           {loading ? (
             <div className="flex justify-center items-center w-[553px] h-[128px]">
               <Loader2 className="animate-spin w-10 h-10 text-gray-500" />

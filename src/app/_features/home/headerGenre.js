@@ -51,7 +51,7 @@ export const Genre = () => {
           <NavigationMenuTrigger className="cursor-pointer">
             Genre
           </NavigationMenuTrigger>
-          <NavigationMenuContent className="bg-white">
+          <NavigationMenuContent className="bg-white dark:bg-gray-950">
             <div className="gap-1 py-2 px-4">
               <p className="font-semibold text-2xl ">Genre</p>
               <p className="font-normal text-base ">
@@ -67,11 +67,15 @@ export const Genre = () => {
                   className="text-sm text-muted-foreground hover:text-primary transition"
                 >
                   <Badge
-                    variant="default | outline | secondary | destructive"
-                    className="text-black"
+                    variant="outline"
+                    className="text-black dark:text-white dark:bg-gray-700"
                   >
                     {genre.name}
-                    <ChevronRight />
+                    <ChevronRight
+                      strokeWidth={1}
+                      color="currentColor"
+                      className="dark:text-white text-inherit transition-colors"
+                    />
                   </Badge>
                 </NavigationMenuLink>
               ))}

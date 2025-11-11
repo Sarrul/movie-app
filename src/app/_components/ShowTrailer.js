@@ -58,7 +58,7 @@ export default function ShowTrailer({ id, show, onClose }) {
             allowFullScreen
           ></iframe>
           <button
-            className="absolute top-3 right-3 bg-white px-3 py-1 rounded-[10px]"
+            className="absolute top-3 right-3 bg-white dark:bg-gray-950 px-3 py-1 rounded-[10px]"
             onClick={() => handleSeeDetail(id)}
           >
             see movie detail

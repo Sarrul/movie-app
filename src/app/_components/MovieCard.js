@@ -1,4 +1,4 @@
-import { ArrowRight } from "../_icons/ArrowRight";
+import { ArrowRight } from "lucide-react";
 import { StarIcon } from "../_icons/StarIcon";
 import { useRouter } from "next/navigation";
 
@@ -12,7 +12,7 @@ export const MovieCard = ({ rating, title, imageUrl, id, direction }) => {
   if (direction === "horizontal") {
     return (
       <div onClick={handleMovieDetails} className="cursor-pointer mt-2 ">
-        <div className="flex gap-4 w-[550px] p-2 bg-white ml-3 rounded-lg hover:bg-gray-100">
+        <div className="flex gap-4 w-[550px] p-2 bg-white dark:bg-gray-950 ml-3 rounded-lg hover:bg-gray-100">
           <img
             src={imageUrl}
             alt={title}
@@ -20,12 +20,12 @@ export const MovieCard = ({ rating, title, imageUrl, id, direction }) => {
           />
           <div className="flex flex-col gap-3 w-[454px] h-[99px]">
             <div>
-              <p className="font-semibold truncate text-[#09090B] text-xl tracking-[-0.5px] drop-shadow-lg">
+              <p className="font-semibold truncate text-[#09090B] dark:text-white text-xl tracking-[-0.5px] drop-shadow-lg">
                 {title}
               </p>
               <div className="text-[#09090B] flex items-center gap-1">
                 <StarIcon />
-                <p className="font-medium text-sm flex items-center gap-1">
+                <p className="font-medium dark:text-white text-sm flex items-center gap-1">
                   {rating}
                   <span className="text-xs font-normal text-[#71717A]">
                     /10
@@ -38,10 +38,10 @@ export const MovieCard = ({ rating, title, imageUrl, id, direction }) => {
                 2024
               </div>
               <button className="w-[120px] h-[36px] flex items-center justify-center gap-2 px-16px cursor-pointer ">
-                <p className="text-sm font-medium text-[#09090B] hover:underline">
+                <p className="text-sm font-medium text-[#09090B] dark:text-white hover:underline">
                   See more
                 </p>
-                <ArrowRight />
+                <ArrowRight strokeWidth={1} />
               </button>
             </div>
           </div>
@@ -62,10 +62,10 @@ export const MovieCard = ({ rating, title, imageUrl, id, direction }) => {
         <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity"></div>
       </div>
 
-      <div className="max-w-[230px] w-full h-[95px] bg-[#F4F4F5] rounded-b-lg p-2">
+      <div className="max-w-[230px] w-full h-[95px] bg-[#F4F4F5] dark:bg-[#18181B] rounded-b-lg p-2">
         <div className="flex items-center gap-1">
           <StarIcon />
-          <p className="font-semibold text-lg text-[#09090B] flex items-center gap-1">
+          <p className="font-semibold text-lg text-[#09090B] dark:text-[#71717A] flex items-center gap-1">
             {rate}
             <span className="text-base font-normal text-[#71717A]">/10</span>
           </p>

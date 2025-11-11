@@ -14,7 +14,7 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 import { Badge } from "@/components/ui/badge";
-import { ChevronRight } from "@/app/_icons/ChevronRight";
+import { ChevronRight } from "lucide-react";
 import Link from "next/link";
 
 const BASE_URL = "https://api.themoviedb.org/3";
@@ -177,7 +177,7 @@ export default function SearchResults() {
                 >
                   <Badge
                     variant="default | outline | secondary | destructive"
-                    className="text-black"
+                    className="text-black dark:text-white"
                   >
                     {genre.name}
                     <ChevronRight />

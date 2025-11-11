@@ -8,7 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { useParams } from "next/navigation";
 import { useState, useEffect } from "react";
 // import { useYoutubeDuration } from "@/app/_hooks/useYoutubeDuration";
-import { ArrowRight } from "@/app/_icons/ArrowRight";
+import { ArrowRight } from "lucide-react";
 import { MovieCard } from "@/app/_components/MovieCard";
 import { LoadingMovieDetail } from "@/app/_features/skeloton/LoadingMovieDetail";
 import { useRouter } from "next/navigation";
@@ -143,7 +143,7 @@ export default function MovieDetails() {
           {/* movie title rating */}
           <div className="flex justify-between">
             <div className="flex flex-col">
-              <p className="text-4xl font-bold text-black">
+              <p className="text-4xl font-bold text-black dark:text-white">
                 {movieData?.title}
               </p>
               <div className="font-normal text-lg flex flex-row gap-1">
@@ -158,7 +158,7 @@ export default function MovieDetails() {
               <p>rating</p>
               <div className="flex items-center gap-1">
                 <StarIcon />
-                <p className="font-semibold text-lg text-[#09090B] flex items-center gap-1">
+                <p className="font-semibold text-lg text-[#09090B] dark:text-white flex items-center gap-1">
                   {movieData?.vote_average}
                   <span className="text-base font-normal text-[#71717A]">
                     /10
@@ -207,7 +207,7 @@ export default function MovieDetails() {
               <Badge
                 key={g.id}
                 variant="default | outline | secondary | destructive"
-                className="text-black text-xs font-semibold"
+                className="text-black dark:text-white text-xs font-semibold"
               >
                 {g.name}
               </Badge>
@@ -224,7 +224,7 @@ export default function MovieDetails() {
                 .map((director) => (
                   <p
                     key={director.id}
-                    className="text-base font-normal text-black"
+                    className="text-base font-normal text-black dark:text-white"
                   >
                     {director.name}
                   </p>
@@ -236,7 +236,7 @@ export default function MovieDetails() {
           <div className="flex flex-col gap-2 ">
             <div className="flex flex-row gap-[53px]">
               <p className="text-base font-bold w-16"> Writers</p>
-              <p className="text-base font-normal text-black">
+              <p className="text-base font-normal text-black dark:text-white">
                 {topWriters?.map((writer) => writer.name).join(" · ")}
               </p>
             </div>
@@ -246,7 +246,7 @@ export default function MovieDetails() {
           <div className="flex flex-col gap-2 ">
             <div className="flex flex-row gap-[53px]">
               <p className="text-base font-bold w-16"> Stars</p>
-              <p className="text-base font-normal text-black">
+              <p className="text-base font-normal text-black dark:text-white">
                 {topCaster?.map((acting) => acting.name).join(" · ")}
               </p>
             </div>
@@ -262,7 +262,7 @@ export default function MovieDetails() {
               onClick={() => handleSeeMorebtn(id)}
             >
               <p className="text-sm font-medium hover:underline">See more</p>
-              <ArrowRight />
+              <ArrowRight strokeWidth={1} />
             </div>
           </div>
 

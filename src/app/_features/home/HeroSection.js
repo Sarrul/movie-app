@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/carousel";
 import { StarIcon } from "@/app/_icons/StarIcon";
 import { WatchTrailerIcon } from "@/app/_icons/WatchTrailerIcon";
+import { Play } from "lucide-react";
 import ShowTrailer from "@/app/_components/ShowTrailer";
 
 const BASE_URL = "https://api.themoviedb.org/3";
@@ -66,7 +67,7 @@ export function HeroSection(id) {
       </div>
     );
   return (
-    <Carousel className="w-full h-[246px] lg:h-[600px] relative ">
+    <Carousel className="w-full h-[600px] relative ">
       <CarouselContent className="flex h-full">
         {movieData.slice(0, 5).map((movie, index) => (
           <CarouselItem
@@ -79,15 +80,15 @@ export function HeroSection(id) {
                   style={{
                     backgroundImage: `url('https://image.tmdb.org/t/p/original${movie.backdrop_path}')`,
                   }}
-                  className="w-full h-full bg-cover bg-center cursor-pointer"
+                  className="w-full h-[600px] bg-cover bg-center cursor-pointer"
                   onClick={() => handleMovieDetails(movie.id)}
                 >
-                  <div className=" flex flex-col items-start gap-4 pt-12 sm:pt-16 md:pt-32 lg:pt-44 pl-4 sm:pl-8 md:pl-16 lg:pl-35 w-[90%] sm:w-[404px]">
+                  <div className=" flex flex-col items-start gap-4 pt-45 pl-35">
                     <div>
                       <span className="text-white font-inter text-base font-normal leading-6">
                         Now Playing:
                       </span>
-                      <p className="text-white text-lg sm:text-xl md:text-2xl lg:text-4xl font-bold">
+                      <p className="text-white text-lg  font-bold">
                         {movie.title}
                       </p>
                       <div className="flex gap-1 items-center">
@@ -102,16 +103,16 @@ export function HeroSection(id) {
                     </div>
                     <div className="text-[#FAFAFA] font-inter text-xs font-normal leading-4 w-[302px]">
                       {movie.overview}
-                    </div>{" "}
-                    <div className="flex h-10 py-2 px-4 justify-center items-center gap-2 rounded-md bg-[#F4F4F5] hover:bg-[#f4f4f5]/70 text-sm sm:text-base">
-                      <WatchTrailerIcon />
+                    </div>
+                    <div className="flex h-10 py-2 px-4 justify-center items-center gap-2 rounded-md bg-[#F4F4F5] dark:bg-gray-900 dark:text-white hover:bg-[#f4f4f5]/70 text-base">
+                      <Play strokeWidth={1} className="w-4 h-4" />
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
                           setSelectedMovieId(movie.id);
                           setShowTrailer(true);
                         }}
-                        className="text-[var(--text-text-secondary-foreground)] font-inter text-sm font-medium leading-50"
+                        className="text-[var(--text-text-secondary-foreground)] font-inter text-sm font-medium leading-50 "
                       >
                         Watch Trailer
                       </button>
