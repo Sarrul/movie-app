@@ -18,24 +18,25 @@ export const HeaderSearch = () => {
 
   const router = useRouter();
 
-  const SearchDataList = async () => {
-    setLoading(true);
-    const SearchDataEndpoint = `${BASE_URL}/search/movie?query=${searchValue}&language=en-US&page=1`;
-    const searchDataResponse = await fetch(SearchDataEndpoint, {
-      headers: {
-        Authorization: `Bearer ${ACCESS_TOKEN}`,
-        "Content-Type": "application/json",
-      },
-    });
-    const data = await searchDataResponse.json();
-    setSearchData(data.results);
-    setLoading(false);
-  };
   const handleSeeAllResults = () => {
     router.push(`/searchResult/${encodeURIComponent(searchValue)}`);
   };
 
   useEffect(() => {
+    const SearchDataList = async () => {
+      setLoading(true);
+      const SearchDataEndpoint = `${BASE_URL}/search/movie?query=${searchValue}&language=en-US&page=1`;
+      const searchDataResponse = await fetch(SearchDataEndpoint, {
+        headers: {
+          Authorization: `Bearer ${ACCESS_TOKEN}`,
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await searchDataResponse.json();
+      setSearchData(data.results);
+      setLoading(false);
+    };
+
     SearchDataList();
   }, [searchValue]);
 
@@ -76,7 +77,7 @@ export const HeaderSearch = () => {
                     className="text-sm font-medium leading-[20px] py-[8px] px-[16px] hover:underline cursor-pointer"
                     onClick={handleSeeAllResults}
                   >
-                    See all results for "{searchValue}"
+                    See all results for &quot;{searchValue}&quot;
                   </button>
                 </div>
               ) : (

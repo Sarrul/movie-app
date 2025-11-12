@@ -1,6 +1,7 @@
 import { ArrowRight } from "lucide-react";
 import { StarIcon } from "../_icons/StarIcon";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 export const MovieCard = ({ rating, title, imageUrl, id, direction }) => {
   const router = useRouter();
@@ -57,6 +58,9 @@ export const MovieCard = ({ rating, title, imageUrl, id, direction }) => {
         <img
           src={imageUrl}
           alt={title}
+          width={230}
+          height={340}
+          loading="lazy"
           className="h-full w-full object-cover"
         />
         <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity"></div>

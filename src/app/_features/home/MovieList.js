@@ -15,27 +15,27 @@ export const MovieList = ({ type, title }) => {
   const router = useRouter();
 
   const [movieData, setMoviedata] = useState([]);
-  const getData = async () => {
-    setLoading(true);
-    try {
-      const MoviesEndpoint = `${BASE_URL}/movie/${type}?language=en-US&page=1`;
-      const response = await fetch(MoviesEndpoint, {
-        headers: {
-          Authorization: `Bearer ${ACCESS_TOKEN}`,
-          "Content-Type": "application/json",
-        },
-      });
-      const data = await response.json();
-      setMoviedata(data.results);
-      setLoading(false);
-    } catch (err) {
-      console.error("Failed to fetch upcoming movies:", err);
-    }
-  };
 
   useEffect(() => {
+    const getData = async () => {
+      setLoading(true);
+      try {
+        const MoviesEndpoint = `${BASE_URL}/movie/${type}?language=en-US&page=1`;
+        const response = await fetch(MoviesEndpoint, {
+          headers: {
+            Authorization: `Bearer ${ACCESS_TOKEN}`,
+            "Content-Type": "application/json",
+          },
+        });
+        const data = await response.json();
+        setMoviedata(data.results);
+        setLoading(false);
+      } catch (err) {
+        console.error("Failed to fetch upcoming movies:", err);
+      }
+    };
     getData();
-  }, []);
+  }, [type]);
 
   const handleSeeMorebtn = () => {
     router.push(`movies/${type}`);

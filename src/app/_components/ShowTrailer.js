@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
 
 const BASE_URL = "https://api.themoviedb.org/3";
@@ -12,7 +12,7 @@ export default function ShowTrailer({ id, show, onClose }) {
   const [trailerKey, setTrailerKey] = useState("");
   const router = useRouter();
 
-  const getTrailer = async () => {
+  const getTrailer = useCallback(async () => {
     const response = await fetch(
       `${BASE_URL}/movie/${id}/videos?language=en-US`,
       {
@@ -27,7 +27,7 @@ export default function ShowTrailer({ id, show, onClose }) {
       (vid) => vid.type === "Trailer" && vid.site === "YouTube"
     );
     setTrailerKey(trailer?.key);
-  };
+  }, [id]);
 
   const handleSeeDetail = (id) => {
     router.push(`/movieDetails/${id}`);
@@ -35,7 +35,7 @@ export default function ShowTrailer({ id, show, onClose }) {
 
   useEffect(() => {
     if (show) getTrailer();
-  }, [id, show]);
+  }, [getTrailer, show]);
 
   if (!show) return null;
 

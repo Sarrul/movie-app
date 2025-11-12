@@ -32,39 +32,6 @@ export default function SearchResults() {
   const [searchData, setSearchData] = useState([]);
   const [totalResults, setTotalResults] = useState(0);
 
-  const SearchDataList = async () => {
-    setLoading(true);
-    const SearchDataEndpoint = `${BASE_URL}/search/movie?query=${query}&language=en-US&page=${page}`;
-    const searchDataResponse = await fetch(SearchDataEndpoint, {
-      headers: {
-        Authorization: `Bearer ${ACCESS_TOKEN}`,
-        "Content-Type": "application/json",
-      },
-    });
-    const data = await searchDataResponse.json();
-    setSearchData(data.results);
-    setTotalResults(data.total_results);
-    setLoading(false);
-  };
-
-  const getData = async () => {
-    // setLoading(true);
-    try {
-      const GenreEndpoint = `${BASE_URL}/genre/movie/list?language=en`;
-      const response = await fetch(GenreEndpoint, {
-        headers: {
-          Authorization: `Bearer ${ACCESS_TOKEN}`,
-          "Content-Type": "application/json",
-        },
-      });
-      const data = await response.json();
-      setMoviedata(data.genres);
-    } catch (err) {
-      console.error("Failed to fetch upcoming movies:", err);
-    }
-    // setLoading(false);
-  };
-
   const handlePreviousBtn = (page) => {
     if (page > 1) {
       setPage(page - 1);
@@ -75,6 +42,37 @@ export default function SearchResults() {
   };
 
   useEffect(() => {
+    const SearchDataList = async () => {
+      setLoading(true);
+      const SearchDataEndpoint = `${BASE_URL}/search/movie?query=${query}&language=en-US&page=${page}`;
+      const searchDataResponse = await fetch(SearchDataEndpoint, {
+        headers: {
+          Authorization: `Bearer ${ACCESS_TOKEN}`,
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await searchDataResponse.json();
+      setSearchData(data.results);
+      setTotalResults(data.total_results);
+      setLoading(false);
+    };
+    const getData = async () => {
+      // setLoading(true);
+      try {
+        const GenreEndpoint = `${BASE_URL}/genre/movie/list?language=en`;
+        const response = await fetch(GenreEndpoint, {
+          headers: {
+            Authorization: `Bearer ${ACCESS_TOKEN}`,
+            "Content-Type": "application/json",
+          },
+        });
+        const data = await response.json();
+        setMoviedata(data.genres);
+      } catch (err) {
+        console.error("Failed to fetch upcoming movies:", err);
+      }
+      // setLoading(false);
+    };
     if (query) SearchDataList();
     getData();
   }, [query, page]);

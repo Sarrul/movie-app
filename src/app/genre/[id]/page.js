@@ -37,45 +37,6 @@ export default function GenreResults() {
     .map((g) => g.name)
     .join(", ");
 
-  const getData = async () => {
-    // setLoading(true);
-    try {
-      const GenreEndpoint = `${BASE_URL}/discover/movie?language=en&with_genres=${selectedGenres.join(
-        ","
-      )}&page=${page}`;
-      const response = await fetch(GenreEndpoint, {
-        headers: {
-          Authorization: `Bearer ${ACCESS_TOKEN}`,
-          "Content-Type": "application/json",
-        },
-      });
-      const data = await response.json();
-      setMoviedata(data.results);
-      setTotalResults(data.total_results);
-    } catch (err) {
-      console.error("Failed to fetch upcoming movies:", err);
-    }
-    // setLoading(false);
-  };
-
-  const getGenre = async () => {
-    // setLoading(true);
-    try {
-      const GenreEndpoint = `${BASE_URL}/genre/movie/list?language=en`;
-      const response = await fetch(GenreEndpoint, {
-        headers: {
-          Authorization: `Bearer ${ACCESS_TOKEN}`,
-          "Content-Type": "application/json",
-        },
-      });
-      const data = await response.json();
-      setGenres(data.genres);
-    } catch (err) {
-      console.error("Failed to fetch upcoming movies:", err);
-    }
-    // setLoading(false);
-  };
-
   const handlePreviousBtn = (page) => {
     if (page > 1) {
       setPage(page - 1);
@@ -86,6 +47,43 @@ export default function GenreResults() {
   };
 
   useEffect(() => {
+    const getData = async () => {
+      // setLoading(true);
+      try {
+        const GenreEndpoint = `${BASE_URL}/discover/movie?language=en&with_genres=${selectedGenres.join(
+          ","
+        )}&page=${page}`;
+        const response = await fetch(GenreEndpoint, {
+          headers: {
+            Authorization: `Bearer ${ACCESS_TOKEN}`,
+            "Content-Type": "application/json",
+          },
+        });
+        const data = await response.json();
+        setMoviedata(data.results);
+        setTotalResults(data.total_results);
+      } catch (err) {
+        console.error("Failed to fetch upcoming movies:", err);
+      }
+      // setLoading(false);
+    };
+    const getGenre = async () => {
+      // setLoading(true);
+      try {
+        const GenreEndpoint = `${BASE_URL}/genre/movie/list?language=en`;
+        const response = await fetch(GenreEndpoint, {
+          headers: {
+            Authorization: `Bearer ${ACCESS_TOKEN}`,
+            "Content-Type": "application/json",
+          },
+        });
+        const data = await response.json();
+        setGenres(data.genres);
+      } catch (err) {
+        console.error("Failed to fetch upcoming movies:", err);
+      }
+      // setLoading(false);
+    };
     getData();
     getGenre();
   }, [genreId, page, selectedGenres]);

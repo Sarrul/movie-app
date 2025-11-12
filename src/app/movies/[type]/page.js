@@ -26,29 +26,28 @@ export default function MoviesType() {
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
 
-  const getData = async () => {
-    try {
-      //   setLoading(true);
-      const PopularMovieEndpoint = `${BASE_URL}/movie/${param.type}?language=en-US&page=${page}`;
-      console.log("Fetching:", PopularMovieEndpoint);
-
-      const response = await fetch(PopularMovieEndpoint, {
-        headers: {
-          Authorization: `Bearer ${ACCESS_TOKEN}`,
-          "Content-Type": "application/json",
-        },
-      });
-      const data = await response.json();
-
-      setMoviedata(data.results);
-      setLoading(false);
-    } catch (err) {
-      console.error("Failed to fetch upcoming movies:", err);
-      setLoading(false);
-    }
-  };
-
   useEffect(() => {
+    const getData = async () => {
+      try {
+        //   setLoading(true);
+        const PopularMovieEndpoint = `${BASE_URL}/movie/${param.type}?language=en-US&page=${page}`;
+        console.log("Fetching:", PopularMovieEndpoint);
+
+        const response = await fetch(PopularMovieEndpoint, {
+          headers: {
+            Authorization: `Bearer ${ACCESS_TOKEN}`,
+            "Content-Type": "application/json",
+          },
+        });
+        const data = await response.json();
+
+        setMoviedata(data.results);
+        setLoading(false);
+      } catch (err) {
+        console.error("Failed to fetch upcoming movies:", err);
+        setLoading(false);
+      }
+    };
     getData();
   }, [page, param.type]);
 

@@ -27,31 +27,30 @@ export default function MoreLikeThis() {
   const [page, setPage] = useState(1);
   const id = params.id;
 
-  const getData = async () => {
-    try {
-      //   setLoading(true);
-      const MoreLikeThisEndpoint = `${BASE_URL}/movie/${id}/similar?language=en-US&page=${page}`;
-      console.log("Fetching:", MoreLikeThisEndpoint);
-
-      const response = await fetch(MoreLikeThisEndpoint, {
-        headers: {
-          Authorization: `Bearer ${ACCESS_TOKEN}`,
-          "Content-Type": "application/json",
-        },
-      });
-      const data = await response.json();
-
-      setMoviedata(data.results);
-      setLoading(false);
-    } catch (err) {
-      console.error("Failed to fetch upcoming movies:", err);
-      setLoading(false);
-    }
-  };
-
   useEffect(() => {
+    const getData = async () => {
+      try {
+        //   setLoading(true);
+        const MoreLikeThisEndpoint = `${BASE_URL}/movie/${id}/similar?language=en-US&page=${page}`;
+        console.log("Fetching:", MoreLikeThisEndpoint);
+
+        const response = await fetch(MoreLikeThisEndpoint, {
+          headers: {
+            Authorization: `Bearer ${ACCESS_TOKEN}`,
+            "Content-Type": "application/json",
+          },
+        });
+        const data = await response.json();
+
+        setMoviedata(data.results);
+        setLoading(false);
+      } catch (err) {
+        console.error("Failed to fetch upcoming movies:", err);
+        setLoading(false);
+      }
+    };
     getData();
-  }, [page]);
+  }, [page, id]);
 
   const handlePreviousBtn = (page) => {
     if (page > 1) {
